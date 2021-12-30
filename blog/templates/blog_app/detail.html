@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+
 <h1>Detail Page</h1>
 <hr>
 {% if post.image %}
@@ -5,3 +8,5 @@
 {% endif %}
 <h4>タイトル：{{ post.title }}</h4>
 <p>内容：{{ post.text }}</p>
+
+{% endblock %}
