@@ -5,6 +5,17 @@ from blog_app .models import Post
 from django.contrib.auth.models import User
 
 # Create your views here.
+def edit(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    if request.method == "POST":
+        form = SignUpForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect(request, 'user_app/edit.html', {'form':form, 'user':user })
+    else:
+        form = SignUpForm(instance=user)
+    return render(request, 'user_app/edit.html', {'form':form, 'user':user})
+
 def detail(request, user_id):
     user = get_object_or_404(User, id=user_id)
     posts = user.post_set.all().order_by('-created_at')
