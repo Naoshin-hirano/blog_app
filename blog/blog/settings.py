@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog_app.apps.BlogAppConfig',
+    'user_app.apps.UserAppConfig',
     'widget_tweaks',
 ]
 
@@ -123,6 +124,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+LOGIN_URL = 'user_app:login'
+LOGIN_REDIRECT_URL = 'blog_app:index'
+LOGOUT_REDIRECT_URL = 'blog_app:index'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
