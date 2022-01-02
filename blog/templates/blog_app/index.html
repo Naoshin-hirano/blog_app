@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-{% block content %}   
+{% block content %}  
 <h1 class="mt-5 pt-4 text-center">ブログサイト</h1>
+
 <div class="d-flex justify-content-center flex-wrap">
 {% for post in posts%}
 <a href="{% url 'blog_app:detail' post_id=post.id %}">
@@ -16,8 +17,10 @@
        {{ post.text|truncatechars:17 }}
      </p>
    </a>
+   <p></p>
      <p>#{{post.tag}}</p>
-     <p>{{post.created_at}}</p>
+     <p>{{post.created_at}} |
+     <a href="{% url 'user_app:detail' post.user.id %}">{{post.user.username}}</a></p>
  </div>
 </div>
 {% endfor %}
