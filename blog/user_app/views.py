@@ -5,6 +5,11 @@ from blog_app .models import Post
 from django.contrib.auth.models import User
 
 # Create your views here.
+def delete(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    user.delete()
+    return redirect('blog_app:index')
+
 def edit(request, user_id):
     user = get_object_or_404(User, id=user_id)
     if request.method == "POST":
