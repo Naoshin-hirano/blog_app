@@ -1,9 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SignUpForm
 from django.contrib.auth import authenticate, login
 from blog_app .models import Post
+from django.contrib.auth.models import User
 
 # Create your views here.
+def detail(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    posts = user.post_set.all().order_by('-created_at')
+    return render(request, 'user_app/detail.html', {'user': user, 'posts': posts})
+
 def signup(request):
     signup_form = SignUpForm(request.POST or None)
     if request.method == "POST" and signup_form.is_valid():
