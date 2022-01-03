@@ -20,6 +20,7 @@
    <button type="submit" class="btn btn-block btn-outline-success">編集</button>
  </form>
  <!-- userはviewsのデータベースの箇所({})から参照 -->
+ {% if request.user == user %} 
  <a href="{% url 'user_app:delete' user_id=user.id %}"><button type="button" class="btn btn-outline-danger">退会する</button></a> 
- 
+ {% endif %}
 {% endblock %}

@@ -2,13 +2,16 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Tag
 from .forms import PostAddForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def delete(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     post.delete()
     return redirect('blog_app:index')
 
+@login_required
 def edit(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if request.method == "POST":
@@ -22,6 +25,7 @@ def edit(request, post_id):
     #formにpostのデータを入れた状態のデータをadd.htmlに入れる
     return render(request, 'blog_app/edit.html', {'form': form, 'post': post})
 
+@login_required
 def add(request):
     #url/へ遷移してからPOSTでリクエスト出したとき
     if request.method == "POST":
